@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* Basic styling for the login form */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Email">
+            <div class="error" id="email-error"></div>
+            <input type="password" id="password" placeholder="Password">
+            <div class="error" id="password-error"></div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="success" id="confirmation"></div>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const emailError = document.getElementById("email-error");
+        const passwordError = document.getElementById("password-error");
+        const confirmation = document.getElementById("confirmation");
+
+        document.getElementById("login-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            // Validate email
+            const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+            if (!isValidEmail) {
+                emailError.textContent = "Invalid email address";
+                return;
+            }
+            emailError.textContent = "";
+
+            // Validate password
+            const isValidPassword = passwordInput.value.length >= 8;
+            if (!isValidPassword) {
+                passwordError.textContent = "Password must be at least 8 characters";
+                return;
+            }
+            passwordError.textContent = "";
+
+            // Show confirmation
+            confirmation.textContent = "Successful login!";
+        });
+    </script>
+</body>
+</html>
